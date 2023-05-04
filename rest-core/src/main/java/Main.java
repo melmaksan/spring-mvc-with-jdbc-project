@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("appContext.xml");
+                new ClassPathXmlApplicationContext("coreApplicationContext.xml");
 
         TagService tagService = context.getBean("tagService", TagService.class);
 

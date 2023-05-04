@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,8 +17,18 @@ import java.util.Map;
 
 public class TagDaoImpl implements TagDao {
 
-    @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public Tag findById(int id) {
@@ -30,7 +42,7 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public List<Tag> findAll() {
-        return jdbcTemplate.query("SELECT * FROM tag",
+        return jdbcTemplate.query("SELECT * FROM \"tag\"",
                 new TagRowMapper());
     }
 

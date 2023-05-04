@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -18,8 +20,18 @@ import java.util.*;
 
 public class GiftCertificateDaoImpl implements GiftCertificateDao {
 
-    @Autowired
+    private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public GiftCertificate findById(long id) throws DataAccessException {
