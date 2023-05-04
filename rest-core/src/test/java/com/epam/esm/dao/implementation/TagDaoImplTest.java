@@ -19,7 +19,6 @@ class TagDaoImplTest {
     static void setUp() {
         EmbeddedDatabase db = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .setName("certificate_db")
                 .addScript("h2/certificateSchema.sql")
                 .addScript("h2/certificateData.sql")
                 .build();

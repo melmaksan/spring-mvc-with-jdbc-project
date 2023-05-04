@@ -6,7 +6,7 @@
     <file url="file://$PROJECT_DIR$/rest-core/src/main/java/com/epam/esm/dao/implementation/TagDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/rest-core/src/main/resources/mySqlCertificateScript.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/rest-core/src/test/java/com/epam/esm/dao/implementation/TagDaoImplTest.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/rest-core/src/test/resources/certificateData.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/rest-core/src/test/resources/certificateSchema.sql" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/rest-core/src/test/resources/h2/certificateData.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/rest-core/src/test/resources/h2/certificateSchema.sql" dialect="H2" />
   </component>
 </project>
