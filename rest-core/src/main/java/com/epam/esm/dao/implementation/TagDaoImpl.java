@@ -42,7 +42,7 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public List<Tag> findAll() {
-        return jdbcTemplate.query("SELECT * FROM \"tag\"",
+        return jdbcTemplate.query("SELECT * FROM tag",
                 new TagRowMapper());
     }
 
