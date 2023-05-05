@@ -30,6 +30,10 @@
         <property name="dataSource" ref="ds" />
     </bean>
 
+    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+
 <!--    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
 <!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
 <!--        &lt;!&ndash; Where pages are kept &ndash;&gt;-->

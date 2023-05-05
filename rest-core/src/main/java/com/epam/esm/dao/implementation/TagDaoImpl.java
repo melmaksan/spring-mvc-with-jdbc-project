@@ -32,24 +32,24 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public Tag findById(int id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM tag WHERE id = ?", new TagRowMapper(), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM certificate_db.tag WHERE id = ?", new TagRowMapper(), id);
     }
 
     @Override
     public Tag findByName(String name) {
-        return jdbcTemplate.queryForObject("SELECT * FROM tag WHERE name = ?", new TagRowMapper(), name);
+        return jdbcTemplate.queryForObject("SELECT * FROM certificate_db.tag WHERE name = ?", new TagRowMapper(), name);
     }
 
     @Override
     public List<Tag> findAll() {
-        return jdbcTemplate.query("SELECT * FROM tag",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.tag",
                 new TagRowMapper());
     }
 
     @Override
     public Integer insert(Tag obj) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        simpleJdbcInsert.withTableName("tag").usingGeneratedKeyColumns("id");
+        simpleJdbcInsert.withTableName("certificate_db.tag").usingGeneratedKeyColumns("id");
         Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("name", obj.getName());
         Number insertedId = simpleJdbcInsert.executeAndReturnKey(parameters);
@@ -58,7 +58,7 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public Integer delete(Integer id) {
-        return jdbcTemplate.update("DELETE from tag WHERE id = ?", id);
+        return jdbcTemplate.update("DELETE from certificate_db.tag WHERE id = ?", id);
     }
 
     public static class TagRowMapper implements RowMapper<Tag> {

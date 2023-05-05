@@ -13,42 +13,25 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--    <context:property-placeholder location="classpath:testApplication.properties" />-->
+    <context:property-placeholder location="classpath:testApplication.properties" />
 
-<!--    <jdbc:embedded-database id="dataSource" type="H2" database-name="certificate_db">-->
-<!--        <jdbc:script location="classpath:certificateSchema.sql"/>-->
-<!--        <jdbc:script location="classpath:certificateData.sql"/>-->
-<!--    </jdbc:embedded-database>-->
+    <jdbc:embedded-database id="dataSource" type="H2" database-name="certificate_db">
+        <jdbc:script location="classpath:h2/certificateSchema.sql"/>
+        <jdbc:script location="classpath:h2/certificateData.sql"/>
+    </jdbc:embedded-database>
 
-<!--    <bean name="ds" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" depends-on="dataSource">-->
-<!--        <property name="driverClassName" value="${datasource.driverClassName}" />-->
-<!--        <property name="url" value="${datasource.url}" />-->
-<!--        <property name="username" value="${datasource.username}" />-->
-<!--        <property name="password" value="${datasource.password}" />-->
-<!--    </bean>-->
+    <bean name="ds" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+        <property name="driverClassName" value="${datasource.driverClassName}" />
+        <property name="url" value="${datasource.url}" />
+        <property name="username" value="${datasource.username}" />
+        <property name="password" value="${datasource.password}" />
+    </bean>
 
-<!--    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="ds" />-->
-<!--    </bean>-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds" />
+    </bean>
 
-<!--    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">-->
-<!--        <property name="dataSource" ref="ds"/>-->
-<!--    </bean>-->
-
-    <!-- GiftCertificate service -->
-    <bean id="giftCertificateService" class="com.epam.esm.service.implementation.GiftCertificateServiceImpl" />
-    <!-- GiftCertificate dao -->
-    <bean id="giftCertificateDao" class="com.epam.esm.dao.implementation.GiftCertificateDaoImpl" />
-    <!-- Tag service -->
-    <bean id="tagService" class="com.epam.esm.service.implementation.TagServiceImpl" />
-    <!-- Tag dao -->
-    <bean id="tagDao" class="com.epam.esm.dao.implementation.TagDaoImpl" />
-    <!-- GiftCertificateToTag dao -->
-    <bean id="giftCertificateToTagDao" class="com.epam.esm.dao.implementation.GiftCertificateToTagDaoImpl" />
-    <!-- GiftCertificateToTag service -->
-    <bean id="giftCertificateToTagService" class="com.epam.esm.service.implementation.GiftCertificateToTagServiceImpl" />
-
-<!--    <tx:annotation-driven transaction-manager="txManager" />-->
+    <tx:annotation-driven transaction-manager="txManager" />
 
 </beans>
 
