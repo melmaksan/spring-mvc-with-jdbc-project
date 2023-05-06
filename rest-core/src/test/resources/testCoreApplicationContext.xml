@@ -13,6 +13,7 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.epam.esm" />
     <context:property-placeholder location="classpath:testApplication.properties" />
 
     <jdbc:embedded-database id="dataSource" type="H2" database-name="certificate_db">
@@ -30,6 +31,23 @@
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="ds" />
     </bean>
+
+    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+
+    <!-- GiftCertificate service -->
+    <bean id="giftCertificateService" class="com.epam.esm.service.implementation.GiftCertificateServiceImpl" />
+    <!-- GiftCertificate dao -->
+    <bean id="giftCertificateDao" class="com.epam.esm.dao.implementation.GiftCertificateDaoImpl" />
+    <!-- Tag service -->
+    <bean id="tagService" class="com.epam.esm.service.implementation.TagServiceImpl" />
+    <!-- Tag dao -->
+    <bean id="tagDao" class="com.epam.esm.dao.implementation.TagDaoImpl" />
+    <!-- GiftCertificateToTag dao -->
+    <bean id="giftCertificateToTagDao" class="com.epam.esm.dao.implementation.GiftCertificateToTagDaoImpl" />
+    <!-- GiftCertificateToTag service -->
+    <bean id="giftCertificateToTagService" class="com.epam.esm.service.implementation.GiftCertificateToTagServiceImpl" />
 
     <tx:annotation-driven transaction-manager="txManager" />
 

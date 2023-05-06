@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
 
-    private static final String TAG_NAME = "birthday";
+    private static final String TAG_NAME = "toppot";
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context =
@@ -19,7 +19,7 @@ public class Main {
 
         TagService tagService = context.getBean("tagService", TagService.class);
 
-        certificateRun(context, tagService);
+//        certificateRun(context, tagService);
         tagRun(tagService);
     }
 

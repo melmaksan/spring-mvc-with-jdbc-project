@@ -9,5 +9,3 @@ INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES 
 INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES (1, 2);
 INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES (2, 1);
 INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES (2, 2);
-INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES (3, 1);
-INSERT into "gift_certificate_has_tag" ("gift_certificate_id", "tag_id") VALUES (3, 2);

@@ -8,8 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -20,41 +18,33 @@ import java.util.*;
 
 public class GiftCertificateDaoImpl implements GiftCertificateDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public GiftCertificate findById(long id) throws DataAccessException {
         return jdbcTemplate.queryForObject
-                ("SELECT * FROM gift_certificate WHERE id = ?", new GiftCertificateRowMapper(), id);
+                ("SELECT * FROM certificate_db.gift_certificate WHERE id = ?", new GiftCertificateRowMapper(), id);
     }
 
     @Override
     public GiftCertificate findByName(String name) {
         return jdbcTemplate.queryForObject
-                ("SELECT * FROM gift_certificate WHERE name = ?", new GiftCertificateRowMapper(), name);
+                ("SELECT * FROM certificate_db.gift_certificate WHERE name = ?", new GiftCertificateRowMapper(), name);
     }
 
     @Override
     public List<GiftCertificate> findAll() {
-        return jdbcTemplate.query("SELECT * FROM gift_certificate",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate",
                 new GiftCertificateRowMapper());
     }
 
     @Override
     public Long insert(GiftCertificate obj) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        simpleJdbcInsert.withTableName("gift_certificate").usingGeneratedKeyColumns("id");
+        simpleJdbcInsert.withSchemaName("certificate_db").withTableName("gift_certificate")
+                .usingColumns("name", "description", "price", "duration", "create_date", "last_update_date")
+                .usingGeneratedKeyColumns("id").withoutTableColumnMetaDataAccess();
         Map<String, Object> parameters = new HashMap<>(6);
         parameters.put("name", obj.getName());
         parameters.put("description", obj.getDescription());
@@ -73,7 +63,7 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
         if (fields.size() > 0 && parameters.length() > 0) {
             fields.add(certificate.getLastUpdateDate());
             fields.add(certificate.getId());
-            String sql = "UPDATE gift_certificate SET " + parameters + " = ?, last_update_date = ? WHERE id = ?";
+            String sql = "UPDATE certificate_db.gift_certificate SET " + parameters + " = ?, last_update_date = ? WHERE id = ?";
             return jdbcTemplate.update(sql, fields.toArray());
         } else {
             return 0;
@@ -105,37 +95,37 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     public List<GiftCertificate> findByPart(String part) {
         String wildcard = "%" + part + "%";
-        return jdbcTemplate.query("SELECT * FROM gift_certificate WHERE name LIKE ? OR description LIKE ?",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate WHERE name LIKE ? OR description LIKE ?",
                 new GiftCertificateRowMapper(), wildcard, wildcard);
     }
 
     @Override
     public List<GiftCertificate> ascByDate() {
-        return jdbcTemplate.query("SELECT * FROM gift_certificate ORDER BY create_date ASC",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate ORDER BY create_date ASC",
                 new GiftCertificateRowMapper());
     }
 
     @Override
     public List<GiftCertificate> descByDate() {
-        return jdbcTemplate.query("SELECT * FROM gift_certificate ORDER BY create_date DESC",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate ORDER BY create_date DESC",
                 new GiftCertificateRowMapper());
     }
 
     @Override
     public List<GiftCertificate> ascByName() {
-        return jdbcTemplate.query("SELECT * FROM gift_certificate ORDER BY name ASC",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate ORDER BY name ASC",
                 new GiftCertificateRowMapper());
     }
 
     @Override
     public List<GiftCertificate> descByName() {
-        return jdbcTemplate.query("SELECT * FROM gift_certificate ORDER BY name DESC",
+        return jdbcTemplate.query("SELECT * FROM certificate_db.gift_certificate ORDER BY name DESC",
                 new GiftCertificateRowMapper());
     }
 
     @Override
     public Long delete(Long id) {
-        return (long) jdbcTemplate.update("DELETE from gift_certificate WHERE id = ?", id);
+        return (long) jdbcTemplate.update("DELETE from certificate_db.gift_certificate WHERE id = ?", id);
     }
 
     public static class GiftCertificateRowMapper implements RowMapper<GiftCertificate> {

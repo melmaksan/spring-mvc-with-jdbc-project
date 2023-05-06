@@ -17,18 +17,8 @@ import java.util.Map;
 
 public class TagDaoImpl implements TagDao {
 
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Tag findById(int id) {
@@ -49,7 +39,7 @@ public class TagDaoImpl implements TagDao {
     @Override
     public Integer insert(Tag obj) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        simpleJdbcInsert.withTableName("certificate_db.tag").usingGeneratedKeyColumns("id");
+        simpleJdbcInsert.withSchemaName("certificate_db").withTableName("tag").usingColumns("name").usingGeneratedKeyColumns("id").withoutTableColumnMetaDataAccess();
         Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("name", obj.getName());
         Number insertedId = simpleJdbcInsert.executeAndReturnKey(parameters);
