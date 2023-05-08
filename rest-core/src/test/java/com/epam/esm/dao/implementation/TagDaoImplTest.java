@@ -4,6 +4,7 @@ import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.entities.Tag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.springframework.transaction.annotation.Transactional;
