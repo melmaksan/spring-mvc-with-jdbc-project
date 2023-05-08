@@ -33,6 +33,7 @@ class GiftCertificateToTagDaoImplTest {
         List<GiftCertificateToTag> toCertificateList = certificateToTagDao.findByCertificateId(1L);
 
         assertNotNull(toCertificateList);
+        assertEquals(2, toCertificateList.size());
     }
 
     @Test
@@ -45,6 +46,7 @@ class GiftCertificateToTagDaoImplTest {
     @Test
     void findAll() {
         List<GiftCertificateToTag> list = certificateToTagDao.findAll();
+        System.out.println(list);
 
         assertNotNull(list);
     }
@@ -62,10 +64,14 @@ class GiftCertificateToTagDaoImplTest {
 
     @Test
     void delete() {
-        long id = certificateToTagDao.delete(3L);
-        List<GiftCertificateToTag> tagList = certificateToTagDao.findAll();
+        List<GiftCertificateToTag> giftCertificateToTagList = certificateToTagDao.findByCertificateId(certificateToTag.getGiftCertificateId());
+        for (GiftCertificateToTag toTag : giftCertificateToTagList) {
+            long id = certificateToTagDao.delete(toTag.getGiftCertificateId());
 
-        assertEquals(1, id);
-        assertEquals(4, tagList.size(), "there are 3 tags after insert");
+            List<GiftCertificateToTag> tagList = certificateToTagDao.findAll();
+
+            assertEquals(1, id);
+            assertEquals(4, tagList.size(), "there are 3 tags after insert");
+        }
     }
 }

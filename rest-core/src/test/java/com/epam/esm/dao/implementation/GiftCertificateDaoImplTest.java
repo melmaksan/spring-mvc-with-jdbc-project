@@ -128,7 +128,8 @@ class GiftCertificateDaoImplTest {
 
     @Test
     void delete() {
-        long res = giftCertificateDao.delete(17L);
+        GiftCertificate certificate4 = giftCertificateDao.findByName("update");
+        long res = giftCertificateDao.delete(certificate4.getId());
         List<GiftCertificate> certificates = giftCertificateDao.findAll();
 
         assertEquals(1, res);

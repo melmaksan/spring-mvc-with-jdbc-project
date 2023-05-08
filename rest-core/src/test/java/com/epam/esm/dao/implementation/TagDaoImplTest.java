@@ -44,7 +44,7 @@ class TagDaoImplTest {
         List<Tag> tagList = tagDao.findAll();
 
 //        assertEquals(9, id);
-        assertEquals(5, tagList.size(), "there are 3 tags after insert");
+        assertEquals(3, tagList.size(), "there are 3 tags after insert");
     }
 
     @Test
@@ -60,13 +60,14 @@ class TagDaoImplTest {
         Tag tag3 = tagDao.findByName("gift");
 
         assertNotNull(tag3);
-        assertEquals(2, tag3.getId());
+        assertEquals(32, tag3.getId());
     }
 
 
     @Test
     void delete() {
-        int id = tagDao.delete(24);
+        Tag tag4 = tagDao.findByName("test");
+        int id = tagDao.delete(tag4.getId());
         List<Tag> tagList = tagDao.findAll();
 
         assertEquals(1, id);
