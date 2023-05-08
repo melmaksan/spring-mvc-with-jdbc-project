@@ -1,9 +1,7 @@
 package com.epam.esm.dao.implementation;
 
 import com.epam.esm.dao.abstraction.GiftCertificateDao;
-import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.entities.GiftCertificate;
-import com.epam.esm.entities.Tag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -38,8 +36,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void findById() {
         GiftCertificate certificate2 = giftCertificateDao.findById(1);
-        System.out.println(certificate2);
-        System.out.println("findById  ~~~~~~~~~~~~~");
 
         assertNotNull(certificate2);
         assertEquals("Promo_1000", certificate2.getName());
@@ -48,8 +44,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void findByName() {
         GiftCertificate certificate3 = giftCertificateDao.findByName("Promo_100");
-        System.out.println(certificate3);
-        System.out.println("findByName  ~~~~~~~~~~~~~");
 
         assertNotNull(certificate3);
         assertEquals(2, certificate3.getId());
@@ -58,8 +52,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void findByPart() {
         List<GiftCertificate> certificateList = giftCertificateDao.findByPart(certificate.getName().substring(0, 3));
-        System.out.println(certificateList);
-        System.out.println("findByPart  ~~~~~~~~~~~~~");
 
         for (GiftCertificate giftCertificate : certificateList) {
             assertNotNull(giftCertificate);
@@ -70,7 +62,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void findAll() {
         List<GiftCertificate> certificateList = giftCertificateDao.findAll();
-//        System.out.println(certificateList);
 
         assertNotNull(certificateList);
         assertEquals(4, certificateList.size(), "there are 3 default tags");
@@ -80,9 +71,6 @@ class GiftCertificateDaoImplTest {
     void insert() {
         id = giftCertificateDao.insert(certificate);
         List<GiftCertificate> list = giftCertificateDao.findAll();
-        System.out.println(list);
-        System.out.println(id);
-        System.out.println("insert  ~~~~~~~~~~~~~");
 
 //        assertEquals(9, id);
         assertEquals(4, list.size(), "there are 4 tags after insert");
@@ -91,7 +79,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void update() {
         GiftCertificate certificate4 = giftCertificateDao.findById(id);
-        System.out.println(certificate4 + " certificate4");
 
         certificate4.setName("update");
         certificate4.setDuration(200);
@@ -99,8 +86,6 @@ class GiftCertificateDaoImplTest {
 
         long res = giftCertificateDao.update(certificate4);
         GiftCertificate certificate5 = giftCertificateDao.findById(id);
-        System.out.println(certificate5  + " certificate5");
-        System.out.println("update ~~~~~~~~~~~~~");
 
         assertEquals(1, res);
         assertEquals("update", certificate5.getName());
@@ -112,8 +97,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void ascByDate() {
         List<GiftCertificate> certificates = giftCertificateDao.ascByDate();
-        System.out.println(certificates);
-        System.out.println("ascByDate  ~~~~~~~~~~~~~");
 
         assertNotNull(certificates);
         assertEquals("Promo_1000", certificates.get(0).getName());
@@ -122,8 +105,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void descByDate() {
         List<GiftCertificate> certificates = giftCertificateDao.ascByName();
-        System.out.println(certificates);
-        System.out.println("descByDate  ~~~~~~~~~~~~~");
 
         assertNotNull(certificates);
         assertEquals("Promo_100", certificates.get(0).getName());
@@ -132,8 +113,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void ascByName() {
         List<GiftCertificate> certificates = giftCertificateDao.ascByName();
-        System.out.println(certificates);
-        System.out.println("ascByName  ~~~~~~~~~~~~~");
 
         assertNotNull(certificates);
         assertEquals("Promo_100", certificates.get(0).getName());
@@ -142,8 +121,6 @@ class GiftCertificateDaoImplTest {
     @Test
     void descByName() {
         List<GiftCertificate> certificates = giftCertificateDao.descByName();
-        System.out.println(certificates);
-        System.out.println("descByName ~~~~~~~~~~~~~");
 
         assertNotNull(certificates);
         assertEquals("update", certificates.get(0).getName());
@@ -153,8 +130,6 @@ class GiftCertificateDaoImplTest {
     void delete() {
         long res = giftCertificateDao.delete(17L);
         List<GiftCertificate> certificates = giftCertificateDao.findAll();
-        System.out.println(certificates);
-        System.out.println("~~~~~~~~~~~~~");
 
         assertEquals(1, res);
         assertEquals(3, certificates.size(), "there are 3 tags after insert");

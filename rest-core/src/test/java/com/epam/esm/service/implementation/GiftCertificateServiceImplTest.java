@@ -1,20 +1,15 @@
 package com.epam.esm.service.implementation;
 
 import com.epam.esm.dao.abstraction.GiftCertificateDao;
-import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.entities.GiftCertificate;
-import com.epam.esm.entities.GiftCertificateToTag;
-import com.epam.esm.entities.Tag;
 import com.epam.esm.service.abstraction.GiftCertificateService;
 import com.epam.esm.service.abstraction.GiftCertificateToTagService;
-import com.epam.esm.service.abstraction.TagService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
