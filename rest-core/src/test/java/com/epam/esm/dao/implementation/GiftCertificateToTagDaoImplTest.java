@@ -46,7 +46,6 @@ class GiftCertificateToTagDaoImplTest {
     @Test
     void findAll() {
         List<GiftCertificateToTag> list = certificateToTagDao.findAll();
-        System.out.println(list);
 
         assertNotNull(list);
     }
