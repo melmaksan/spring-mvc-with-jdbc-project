@@ -2,7 +2,6 @@ package com.epam.esm.dao.implementation;
 
 import com.epam.esm.dao.abstraction.GiftCertificateToTagDao;
 import com.epam.esm.entities.GiftCertificateToTag;
-import com.epam.esm.entities.Tag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,15 +31,14 @@ class GiftCertificateToTagDaoImplTest {
     @Test
     void findByCertificateId() {
         List<GiftCertificateToTag> toCertificateList = certificateToTagDao.findByCertificateId(1L);
-        System.out.println(toCertificateList);
 
         assertNotNull(toCertificateList);
+        assertEquals(2, toCertificateList.size());
     }
 
     @Test
     void findByTagId() {
         List<GiftCertificateToTag> toTagList = certificateToTagDao.findByTagId(2);
-        System.out.println(toTagList);
 
         assertNotNull(toTagList);
     }
@@ -48,7 +46,6 @@ class GiftCertificateToTagDaoImplTest {
     @Test
     void findAll() {
         List<GiftCertificateToTag> list = certificateToTagDao.findAll();
-        System.out.println(list);
 
         assertNotNull(list);
     }
@@ -66,11 +63,14 @@ class GiftCertificateToTagDaoImplTest {
 
     @Test
     void delete() {
-        long id = certificateToTagDao.delete(3L);
-        List<GiftCertificateToTag> tagList = certificateToTagDao.findAll();
-        System.out.println(tagList);
+        List<GiftCertificateToTag> giftCertificateToTagList = certificateToTagDao.findByCertificateId(certificateToTag.getGiftCertificateId());
+        for (GiftCertificateToTag toTag : giftCertificateToTagList) {
+            long id = certificateToTagDao.delete(toTag.getGiftCertificateId());
 
-        assertEquals(1, id);
-        assertEquals(4, tagList.size(), "there are 3 tags after insert");
+            List<GiftCertificateToTag> tagList = certificateToTagDao.findAll();
+
+            assertEquals(1, id);
+            assertEquals(4, tagList.size(), "there are 3 tags after insert");
+        }
     }
 }

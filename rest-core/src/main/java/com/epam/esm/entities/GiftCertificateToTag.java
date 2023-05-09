@@ -24,7 +24,7 @@ public class GiftCertificateToTag {
     @Override
     public String toString() {
         return "GiftCertificateToTag{" +
-                "userId=" + giftCertificateId +
+                "giftCertificateId=" + giftCertificateId +
                 ", serviceId=" + tagId +
                 '}';
     }

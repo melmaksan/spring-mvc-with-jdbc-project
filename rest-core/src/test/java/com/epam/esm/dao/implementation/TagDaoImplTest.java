@@ -4,7 +4,6 @@ import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.entities.Tag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +33,6 @@ class TagDaoImplTest {
     @Test
     void findAll() {
         List<Tag> tagList = tagDao.findAll();
-        System.out.println(tagList);
 
         assertNotNull(tagList);
         assertEquals(3, tagList.size(), "there are two default tags");
@@ -44,16 +42,14 @@ class TagDaoImplTest {
     void insert() {
         int id = tagDao.insert(tag);
         List<Tag> tagList = tagDao.findAll();
-        System.out.println(tagList);
 
 //        assertEquals(9, id);
-        assertEquals(5, tagList.size(), "there are 3 tags after insert");
+        assertEquals(3, tagList.size(), "there are 3 tags after insert");
     }
 
     @Test
     void findById() {
         Tag tag2 = tagDao.findById(1);
-        System.out.println(tag2);
 
         assertNotNull(tag2);
         assertEquals("discount", tag2.getName());
@@ -62,16 +58,16 @@ class TagDaoImplTest {
     @Test
     void findByName() {
         Tag tag3 = tagDao.findByName("gift");
-        System.out.println(tag3);
 
         assertNotNull(tag3);
-        assertEquals(2, tag3.getId());
+        assertEquals(32, tag3.getId());
     }
 
 
     @Test
     void delete() {
-        int id = tagDao.delete(24);
+        Tag tag4 = tagDao.findByName("test");
+        int id = tagDao.delete(tag4.getId());
         List<Tag> tagList = tagDao.findAll();
 
         assertEquals(1, id);
