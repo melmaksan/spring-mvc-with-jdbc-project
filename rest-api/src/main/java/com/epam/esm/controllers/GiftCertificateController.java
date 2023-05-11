@@ -1,27 +1,36 @@
 package com.epam.esm.controllers;
 
+import com.epam.esm.dto.CertificateDTO;
+import com.epam.esm.dto.Mapper;
 import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.GiftCertificateToTag;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.service.abstraction.GiftCertificateService;
 import com.epam.esm.service.abstraction.GiftCertificateToTagService;
 import com.epam.esm.service.abstraction.TagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class GiftCertificateController {
 
-    @Autowired
-    private GiftCertificateService giftCertificateService;
-    @Autowired
-    private TagService tagService;
-    @Autowired
-    private GiftCertificateToTagService certificateToTagService;
+    private final GiftCertificateService giftCertificateService;
+    private final TagService tagService;
+    private final GiftCertificateToTagService certificateToTagService;
+    private final Mapper mapper;
+
+    public GiftCertificateController(GiftCertificateService giftCertificateService, TagService tagService,
+                                     GiftCertificateToTagService certificateToTagService, Mapper mapper) {
+        this.giftCertificateService = giftCertificateService;
+        this.tagService = tagService;
+        this.certificateToTagService = certificateToTagService;
+        this.mapper = mapper;
+    }
+
 
 //    @RequestMapping("/")
 //    public String showFirstView() {
@@ -29,24 +38,25 @@ public class GiftCertificateController {
 //    }
 
     @GetMapping(value = "/certificate/{id}")
-    public GiftCertificate getCertificateById(@PathVariable long id) {
-        return giftCertificateService.getGiftCertificateById(id);
+    public CertificateDTO getCertificateById(@PathVariable long id) {
+        return mapper.toCertificateDto(giftCertificateService.getGiftCertificateById(id));
     }
 
     @GetMapping(value = "/certificates/findByName/{name}")
-    public GiftCertificate getGiftCertificatesByName(@PathVariable String name) {
-        return giftCertificateService.getGiftCertificateByName(name);
+    public CertificateDTO getGiftCertificatesByName(@PathVariable String name) {
+        return mapper.toCertificateDto(giftCertificateService.getGiftCertificateByName(name));
     }
 
     @GetMapping(value = "/certificates/findByPart/{part}")
-    public List<GiftCertificate> getGiftCertificatesByPart(@PathVariable String part) {
-        return giftCertificateService.getGiftCertificatesByPart(part);
+    public List<CertificateDTO> getGiftCertificatesByPart(@PathVariable String part) {
+        return giftCertificateService.getGiftCertificatesByPart(part)
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/certificates/findByTag/{name}")
-    public List<GiftCertificate> getGiftCertificatesByTag(@PathVariable String name) {
+    public List<CertificateDTO> getGiftCertificatesByTag(@PathVariable String name) {
         Tag tag = tagService.getTagByName(name);
-        return getCertificatesByTag(tag.getId());
+        return getCertificatesByTag(tag.getId()).stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     private List<GiftCertificate> getCertificatesByTag(int id) {
@@ -59,28 +69,33 @@ public class GiftCertificateController {
     }
 
     @GetMapping("/certificates")
-    public List<GiftCertificate> getAllCertificates() {
-        return giftCertificateService.getAllGiftCertificates();
+    public List<CertificateDTO> getAllCertificates() {
+        return giftCertificateService.getAllGiftCertificates()
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/certificates/ascDate")
-    public List<GiftCertificate> getCertificatesAscDate() {
-        return giftCertificateService.sortGiftCertificatesByDateAsc();
+    public List<CertificateDTO> getCertificatesAscDate() {
+        return giftCertificateService.sortGiftCertificatesByDateAsc()
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/certificates/descDate")
-    public List<GiftCertificate> getCertificatesDescDate() {
-        return giftCertificateService.sortGiftCertificatesByDateDesc();
+    public List<CertificateDTO> getCertificatesDescDate() {
+        return giftCertificateService.sortGiftCertificatesByDateDesc()
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/certificates/ascName")
-    public List<GiftCertificate> getCertificatesAscName() {
-        return giftCertificateService.sortGiftCertificatesByNameAsc();
+    public List<CertificateDTO> getCertificatesAscName() {
+        return giftCertificateService.sortGiftCertificatesByNameAsc()
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/certificates/descName")
-    public List<GiftCertificate> getCertificatesDescName() {
-        return giftCertificateService.sortGiftCertificatesByNameDesc();
+    public List<CertificateDTO> getCertificatesDescName() {
+        return giftCertificateService.sortGiftCertificatesByNameDesc()
+                .stream().map(mapper::toCertificateDto).collect(Collectors.toList());
     }
 
 
