@@ -4,27 +4,32 @@ import com.epam.esm.dao.abstraction.GiftCertificateDao;
 import com.epam.esm.entities.GiftCertificate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration({"/testCoreApplicationContext.xml"})
+@Transactional
 class GiftCertificateDaoImplTest {
 
-    private static GiftCertificateDao giftCertificateDao;
+    @Autowired
+    private GiftCertificateDao giftCertificateDao;
     private static GiftCertificate certificate;
     private static long id;
 
     @BeforeAll
     static void setUp() {
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("testCoreApplicationContext.xml");
-
-        giftCertificateDao = context.getBean(GiftCertificateDaoImpl.class);
-
         certificate = new GiftCertificate();
+
         certificate.setName("test");
         certificate.setDescription("testing");
         certificate.setPrice(100);

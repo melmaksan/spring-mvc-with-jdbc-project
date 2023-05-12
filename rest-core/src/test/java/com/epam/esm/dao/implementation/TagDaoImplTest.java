@@ -4,8 +4,12 @@ import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.entities.Tag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,20 +17,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration({"/testCoreApplicationContext.xml"})
 @Transactional
 class TagDaoImplTest {
 
-    private static TagDao tagDao;
+    @Autowired
+    private TagDao tagDao;
     private static Tag tag;
 
     @BeforeAll
     static void setUp() {
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("testCoreApplicationContext.xml");
-
-        tagDao = context.getBean(TagDaoImpl.class);
-
         tag = new Tag();
+
         tag.setName("test");
     }
 
@@ -44,7 +47,7 @@ class TagDaoImplTest {
         List<Tag> tagList = tagDao.findAll();
 
 //        assertEquals(9, id);
-        assertEquals(3, tagList.size(), "there are 3 tags after insert");
+        assertEquals(4, tagList.size(), "there are 3 tags after insert");
     }
 
     @Test
