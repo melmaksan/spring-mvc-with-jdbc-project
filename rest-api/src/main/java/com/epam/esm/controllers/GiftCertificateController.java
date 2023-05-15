@@ -116,8 +116,8 @@ public class GiftCertificateController {
     }
 
     @PutMapping(value = "/certificates")
-    public GiftCertificate updateCertificate(@RequestBody GiftCertificate giftCertificate) {
+    public CertificateDTO updateCertificate(@RequestBody GiftCertificate giftCertificate) {
         giftCertificateService.updateGiftCertificate(giftCertificate);
-        return giftCertificateService.getGiftCertificateById(giftCertificate.getId());
+        return getCertificateById(giftCertificate.getId());
     }
 }
