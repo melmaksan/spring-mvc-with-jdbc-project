@@ -110,9 +110,9 @@ public class GiftCertificateController {
     }
 
     @PostMapping(value = "/certificates")
-    public GiftCertificate addCertificate(@RequestBody GiftCertificate giftCertificate) {
+    public CertificateDTO addCertificate(@RequestBody GiftCertificate giftCertificate) {
         long id = giftCertificateService.addGiftCertificate(giftCertificate);
-        return giftCertificateService.getGiftCertificateById(id);
+        return getCertificateById(id);
     }
 
     @PutMapping(value = "/certificates")
