@@ -1,33 +1,39 @@
 package com.epam.esm.controllers;
 
-import com.epam.esm.entities.GiftCertificate;
+import com.epam.esm.dto.Mapper;
+import com.epam.esm.dto.TagDTO;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.service.abstraction.TagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
 public class TagController {
 
-    @Autowired
-    private TagService tagService;
+    private final TagService tagService;
+    private final Mapper mapper;
+
+    public TagController(TagService tagService, Mapper mapper) {
+        this.tagService = tagService;
+        this.mapper = mapper;
+    }
 
     @GetMapping(value = "/tag/{id}")
-    public Tag showTag(@PathVariable int id) {
-        return tagService.getTagById(id);
+    public TagDTO showTag(@PathVariable int id) {
+        return mapper.toTagDto(tagService.getTagById(id));
     }
 
     @GetMapping(value = "/tag/findByName/{name}")
-    public Tag getGiftCertificatesByName(@PathVariable String name) {
-        return tagService.getTagByName(name);
+    public TagDTO getGiftCertificatesByName(@PathVariable String name) {
+        return mapper.toTagDto(tagService.getTagByName(name));
     }
 
     @GetMapping(value = "/tags")
-    public List<Tag> showTags() {
-        return tagService.getAllTags();
+    public List<TagDTO> showTags() {
+        return tagService.getAllTags().stream().map(mapper::toTagDto).collect(Collectors.toList());
     }
 
     @DeleteMapping(value = "/tags/{id}")

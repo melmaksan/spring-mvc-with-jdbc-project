@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
 
-    private static final String TAG_NAME = "toppot";
+    private static final String TAG_NAME = "birthday";
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context =
@@ -19,7 +19,7 @@ public class Main {
 
         TagService tagService = context.getBean("tagService", TagService.class);
 
-//        certificateRun(context, tagService);
+        certificateRun(context, tagService);
         tagRun(tagService);
     }
 
@@ -142,9 +142,9 @@ public class Main {
         int dlt = tagService.deleteTag(id);
         if (dlt > 0) {
             tagService.deleteTag(tag.getId());
-            System.out.println("Certificate with id " + id + " and " + tag.getId() + " were deleted" + "\n");
+            System.out.println("Certificate with name patriot and " + tag.getName() + " were deleted" + "\n");
         } else {
-            System.out.println("Certificate with id " + id + " wasn't deleted, please try again" + "\n");
+            System.out.println("Certificate with name patriot and " + tag.getName() + " wasn't deleted, please try again" + "\n");
         }
 
     }

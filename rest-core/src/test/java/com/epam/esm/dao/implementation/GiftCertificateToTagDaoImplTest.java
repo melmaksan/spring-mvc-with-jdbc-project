@@ -4,26 +4,28 @@ import com.epam.esm.dao.abstraction.GiftCertificateToTagDao;
 import com.epam.esm.entities.GiftCertificateToTag;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration({"/testCoreApplicationContext.xml"})
 class GiftCertificateToTagDaoImplTest {
 
-    private static GiftCertificateToTagDao certificateToTagDao;
+    @Autowired
+    private GiftCertificateToTagDao certificateToTagDao;
     private static GiftCertificateToTag certificateToTag;
 
 
     @BeforeAll
     static void setUp() {
-        ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("testCoreApplicationContext.xml");
-
-        certificateToTagDao = context.getBean(GiftCertificateToTagDaoImpl.class);
-
         certificateToTag = new GiftCertificateToTag();
+
         certificateToTag.setGiftCertificateId(3);
         certificateToTag.setTagId(1);
     }
