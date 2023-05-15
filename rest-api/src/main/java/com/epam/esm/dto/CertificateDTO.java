@@ -2,7 +2,7 @@ package com.epam.esm.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +15,7 @@ public class CertificateDTO {
     private int price;
     private int duration;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate createDate;
     private List<String> tags;
 

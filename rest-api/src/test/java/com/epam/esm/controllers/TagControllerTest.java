@@ -1,15 +1,12 @@
 package com.epam.esm.controllers;
 
-import com.epam.esm.dao.abstraction.TagDao;
 import com.epam.esm.dto.Mapper;
 import com.epam.esm.entities.Tag;
 import com.epam.esm.service.abstraction.TagService;
-import com.epam.esm.service.implementation.TagServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class TagControllerTest {
 
     @Mock
-    private TagDao tagDao;
-    @InjectMocks
-    private final TagService tagService = new TagServiceImpl();
+    private TagService tagService;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -60,7 +55,7 @@ class TagControllerTest {
     void showTag() throws Exception {
         when(tagService.getTagById(anyInt())).thenReturn(tag);
 
-        this.mockMvc.perform(get("/api/tag/{id}", 1L))
+        this.mockMvc.perform(get("/api/tag/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(tag.getName())));
     }
@@ -99,9 +94,10 @@ class TagControllerTest {
 
     @Test
     void createTag() throws Exception {
-        when(tagDao.insert(tag)).thenReturn(30);
         when(tagService.addTag(tag)).thenReturn(30);
         when(tagService.getTagById(30)).thenReturn(tag);
+
+        System.out.println(objectMapper.writeValueAsString(tag));
 
         this.mockMvc.perform(post("/api/tags")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -113,8 +109,6 @@ class TagControllerTest {
 
     @Test
     void deleteTag() throws Exception {
-        when(tagDao.findById(anyInt())).thenReturn(tag);
-        when(tagDao.delete(anyInt())).thenReturn(1);
         when(tagService.deleteTag(anyInt())).thenReturn(1);
 
         this.mockMvc.perform(delete("/api/tags/{id}", 1))

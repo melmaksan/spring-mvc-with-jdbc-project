@@ -130,7 +130,6 @@ class GiftCertificateServiceImplTest {
         List<GiftCertificate> list = getCertificateList()
                 .stream().sorted(Comparator.comparing(GiftCertificate::getCreateDate)).collect(Collectors.toList());
 
-        System.out.println(list);
         when(giftCertificateDao.ascByDate()).thenReturn(list);
 
         List<GiftCertificate> foundList = certificateService.sortGiftCertificatesByDateAsc();

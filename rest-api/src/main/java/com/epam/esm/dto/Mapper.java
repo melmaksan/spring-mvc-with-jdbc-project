@@ -5,6 +5,7 @@ import com.epam.esm.entities.Tag;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,13 @@ public class Mapper {
         int price = certificate.getPrice();
         int duration = certificate.getDuration();
         LocalDate createDate = certificate.getCreateDate().toLocalDate();
-        List<String> tags = certificate
-                .getTags()
-                .stream()
-                .map(Tag::getName)
-                .collect(Collectors.toList());
+        List<String> tags = new ArrayList<>();
+        if(certificate.getTags() != null) {
+            tags = certificate.getTags()
+                    .stream()
+                    .map(Tag::getName)
+                    .collect(Collectors.toList());
+        }
 
         return new CertificateDTO(name, description, price, duration, createDate, tags);
     }
