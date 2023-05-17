@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({NoSuchDataException.class, EmptyRequestBodyException.class, DuplicateDataException.class})
-    public ResponseEntity<CertificateIncorrectData> handleCertificateException(MainCustomException exception) {
+    public ResponseEntity<CertificateIncorrectData> handleCertificateException(MainCertificateException exception) {
         CertificateIncorrectData data = new CertificateIncorrectData();
         data.setErrorMessage(exception.getMessage());
         data.setErrorCode(Integer.parseInt(HttpStatus.BAD_REQUEST.value() + exception.getServiceCode()));

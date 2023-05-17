@@ -39,17 +39,17 @@
     </bean>
 
     <!-- GiftCertificate service -->
-    <bean id="giftCertificateService" class="com.epam.esm.service.implementation.GiftCertificateServiceImpl" />
+    <bean id="giftCertificateService" class="com.epam.esm.service.impl.GiftCertificateServiceImpl" />
     <!-- GiftCertificate dao -->
-    <bean id="giftCertificateDao" class="com.epam.esm.dao.implementation.GiftCertificateDaoImpl" />
+    <bean id="giftCertificateDao" class="com.epam.esm.dao.impl.GiftCertificateDaoImpl" />
     <!-- Tag service -->
-    <bean id="tagService" class="com.epam.esm.service.implementation.TagServiceImpl" />
+    <bean id="tagService" class="com.epam.esm.service.impl.TagServiceImpl" />
     <!-- Tag dao -->
-    <bean id="tagDao" class="com.epam.esm.dao.implementation.TagDaoImpl" />
+    <bean id="tagDao" class="com.epam.esm.dao.impl.TagDaoImpl" />
     <!-- GiftCertificateToTag dao -->
-    <bean id="giftCertificateToTagDao" class="com.epam.esm.dao.implementation.GiftCertificateToTagDaoImpl" />
+    <bean id="giftCertificateToTagDao" class="com.epam.esm.dao.impl.GiftCertificateToTagDaoImpl" />
     <!-- GiftCertificateToTag service -->
-    <bean id="giftCertificateToTagService" class="com.epam.esm.service.implementation.GiftCertificateToTagServiceImpl" />
+    <bean id="giftCertificateToTagService" class="com.epam.esm.service.impl.GiftCertificateToTagServiceImpl" />
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 
