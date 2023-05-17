@@ -34,14 +34,6 @@
         <property name="dataSource" ref="ds"/>
     </bean>
 
-<!--    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
-<!--        &lt;!&ndash; Where pages are kept &ndash;&gt;-->
-<!--        <property name="prefix" value="/WEB-INF/jsp/" />-->
-<!--        &lt;!&ndash; What is the page extension &ndash;&gt;-->
-<!--        <property name="suffix" value=".jsp" />-->
-<!--    </bean>-->
-
     <!-- GiftCertificate service -->
     <bean id="giftCertificateService" class="com.epam.esm.service.impl.GiftCertificateServiceImpl" />
     <!-- GiftCertificate dao -->

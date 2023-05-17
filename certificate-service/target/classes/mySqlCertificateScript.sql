@@ -63,21 +63,6 @@ CREATE TABLE IF NOT EXISTS `certificate_db`.`gift_certificate_has_tag` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
-
-INSERT into gift_certificate (name, description, price, duration, create_date) VALUES ('Promo_1000', 'gift certificate gives 1000₴ discount for 30 days', 1000, 30, NOW());
-INSERT into gift_certificate (name, description, price, duration, create_date) VALUES ('Promo_100', 'gift certificate gives 100₴ discount for 30 days', 100, 30, NOW());
-INSERT into gift_certificate (name, description, price, duration, create_date) VALUES ('Promo_500', 'gift certificate gives 500₴ discount for 30 days', 500, 30, NOW());
-
-INSERT into tag (name) VALUE ('discount');
-INSERT into tag (name) VALUE ('gift');
-
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (1, 1);
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (1, 2);
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (2, 1);
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (2, 2);
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (3, 1);
-INSERT into gift_certificate_has_tag (gift_certificate_id, tag_id) VALUES (3, 2);
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

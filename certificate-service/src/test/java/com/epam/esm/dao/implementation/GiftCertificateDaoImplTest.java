@@ -23,7 +23,6 @@ class GiftCertificateDaoImplTest {
     @Autowired
     private GiftCertificateDao giftCertificateDao;
     private static GiftCertificate certificate;
-    private static long id;
 
     @BeforeAll
     static void setUp() {
@@ -68,32 +67,33 @@ class GiftCertificateDaoImplTest {
         List<GiftCertificate> certificateList = giftCertificateDao.findAll();
 
         assertNotNull(certificateList);
-        assertEquals(4, certificateList.size(), "there are 3 default tags");
+        assertEquals(3, certificateList.size(), "there are 3 default tags");
     }
 
     @Test
     void insert() {
-        id = giftCertificateDao.insert(certificate);
+        long id = giftCertificateDao.insert(certificate);
         List<GiftCertificate> list = giftCertificateDao.findAll();
+        GiftCertificate certificate3 = giftCertificateDao.findById(id);
 
-//        assertEquals(9, id);
+
+        assertEquals("test", certificate3.getName());
         assertEquals(4, list.size(), "there are 4 tags after insert");
     }
 
     @Test
     void update() {
-        GiftCertificate certificate4 = giftCertificateDao.findById(id);
+        GiftCertificate certificate4 = giftCertificateDao.findById(3);
 
         certificate4.setName("update");
         certificate4.setDuration(200);
         certificate4.setLastUpdateDate(LocalDateTime.now());
 
         long res = giftCertificateDao.update(certificate4);
-        GiftCertificate certificate5 = giftCertificateDao.findById(id);
+        GiftCertificate certificate5 = giftCertificateDao.findById(3);
 
         assertEquals(1, res);
         assertEquals("update", certificate5.getName());
-        assertEquals("testing", certificate5.getDescription());
         assertEquals(200, certificate5.getDuration());
 
     }
@@ -127,16 +127,15 @@ class GiftCertificateDaoImplTest {
         List<GiftCertificate> certificates = giftCertificateDao.descByName();
 
         assertNotNull(certificates);
-        assertEquals("update", certificates.get(0).getName());
+        assertEquals("Promo_500", certificates.get(0).getName());
     }
 
     @Test
     void delete() {
-        GiftCertificate certificate4 = giftCertificateDao.findByName("update");
-        long res = giftCertificateDao.delete(certificate4.getId());
+        long res = giftCertificateDao.delete(3L);
         List<GiftCertificate> certificates = giftCertificateDao.findAll();
 
         assertEquals(1, res);
-        assertEquals(3, certificates.size(), "there are 3 tags after insert");
+        assertEquals(2, certificates.size(), "there are 3 tags after insert");
     }
 }

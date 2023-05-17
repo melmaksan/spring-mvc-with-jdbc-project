@@ -31,12 +31,6 @@ public class GiftCertificateController {
         this.mapper = mapper;
     }
 
-
-//    @RequestMapping("/")
-//    public String showFirstView() {
-//        return "first-view";
-//    }
-
     @GetMapping(value = "/certificate/{id}")
     public CertificateDTO getCertificateById(@PathVariable long id) {
         return mapper.toCertificateDto(giftCertificateService.getGiftCertificateById(id));

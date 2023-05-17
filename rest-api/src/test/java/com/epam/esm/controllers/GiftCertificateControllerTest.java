@@ -8,13 +8,9 @@ import com.epam.esm.service.TagService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,8 +28,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration("classpath:testApplicationContext.xml")
 @Transactional
 class GiftCertificateControllerTest {
 
@@ -43,15 +37,14 @@ class GiftCertificateControllerTest {
     private TagService tagService;
     @Mock
     private GiftCertificateService certificateService;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private Mapper mapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Mapper mapper = new Mapper();
     private MockMvc mockMvc;
     private GiftCertificate certificate;
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(new GiftCertificateController
                 (certificateService, tagService,certificateToTagService, mapper)).build();
 
