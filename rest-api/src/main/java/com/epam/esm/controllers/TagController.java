@@ -3,7 +3,7 @@ package com.epam.esm.controllers;
 import com.epam.esm.dto.Mapper;
 import com.epam.esm.dto.TagDTO;
 import com.epam.esm.entities.Tag;
-import com.epam.esm.service.abstraction.TagService;
+import com.epam.esm.service.TagService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

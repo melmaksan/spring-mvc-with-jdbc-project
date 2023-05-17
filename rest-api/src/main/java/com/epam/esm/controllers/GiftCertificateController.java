@@ -5,9 +5,9 @@ import com.epam.esm.dto.Mapper;
 import com.epam.esm.entities.GiftCertificate;
 import com.epam.esm.entities.GiftCertificateToTag;
 import com.epam.esm.entities.Tag;
-import com.epam.esm.service.abstraction.GiftCertificateService;
-import com.epam.esm.service.abstraction.GiftCertificateToTagService;
-import com.epam.esm.service.abstraction.TagService;
+import com.epam.esm.service.GiftCertificateService;
+import com.epam.esm.service.GiftCertificateToTagService;
+import com.epam.esm.service.TagService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

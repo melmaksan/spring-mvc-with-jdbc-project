@@ -2,9 +2,9 @@ package com.epam.esm.controllers;
 
 import com.epam.esm.dto.Mapper;
 import com.epam.esm.entities.GiftCertificate;
-import com.epam.esm.service.abstraction.GiftCertificateService;
-import com.epam.esm.service.abstraction.GiftCertificateToTagService;
-import com.epam.esm.service.abstraction.TagService;
+import com.epam.esm.service.GiftCertificateService;
+import com.epam.esm.service.GiftCertificateToTagService;
+import com.epam.esm.service.TagService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
