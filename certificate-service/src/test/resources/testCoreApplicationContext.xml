@@ -37,17 +37,17 @@
     </bean>
 
     <!-- GiftCertificate service -->
-    <bean id="giftCertificateService" class="com.epam.esm.service.impl.GiftCertificateServiceImpl" />
+    <bean id="giftCertificateService" class="com.epam.esm.certificate_service.service.impl.GiftCertificateServiceImpl" />
     <!-- GiftCertificate dao -->
-    <bean id="giftCertificateDao" class="com.epam.esm.dao.impl.GiftCertificateDaoImpl" />
+    <bean id="giftCertificateDao" class="com.epam.esm.certificate_service.dao.impl.GiftCertificateDaoImpl" />
     <!-- Tag service -->
-    <bean id="tagService" class="com.epam.esm.service.impl.TagServiceImpl" />
+    <bean id="tagService" class="com.epam.esm.certificate_service.service.impl.TagServiceImpl" />
     <!-- Tag dao -->
-    <bean id="tagDao" class="com.epam.esm.dao.impl.TagDaoImpl" />
+    <bean id="tagDao" class="com.epam.esm.certificate_service.dao.impl.TagDaoImpl" />
     <!-- GiftCertificateToTag dao -->
-    <bean id="giftCertificateToTagDao" class="com.epam.esm.dao.impl.GiftCertificateToTagDaoImpl" />
+    <bean id="giftCertificateToTagDao" class="com.epam.esm.certificate_service.dao.impl.GiftCertificateToTagDaoImpl" />
     <!-- GiftCertificateToTag service -->
-    <bean id="giftCertificateToTagService" class="com.epam.esm.service.impl.GiftCertificateToTagServiceImpl" />
+    <bean id="giftCertificateToTagService" class="com.epam.esm.certificate_service.service.impl.GiftCertificateToTagServiceImpl" />
 
     <tx:annotation-driven transaction-manager="txManager" />
 

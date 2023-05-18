@@ -22,8 +22,8 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.example</groupId>
-      <artifactId>rest-core</artifactId>
+      <groupId>com.epam.esm</groupId>
+      <artifactId>certificate-service</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
