@@ -1,0 +1,7 @@
+com\epam\esm\certificate_service\dao\implementation\GiftCertificateToTagDaoImplTest.class
+com\epam\esm\certificate_service\service\implementation\GiftCertificateToTagServiceImplTest.class
+com\epam\esm\certificate_service\service\implementation\TagServiceImplTest.class
+com\epam\esm\certificate_service\dao\implementation\GiftCertificateDaoImplTest.class
+com\epam\esm\certificate_service\service\implementation\GiftCertificateServiceImplTest.class
+com\epam\esm\certificate_service\TestConfig.class
+com\epam\esm\certificate_service\dao\implementation\TagDaoImplTest.class
