@@ -1,11 +1,11 @@
 package com.epam.esm.certificate_service;
 
-import com.epam.esm.entities.GiftCertificate;
-import com.epam.esm.entities.GiftCertificateToTag;
-import com.epam.esm.entities.Tag;
-import com.epam.esm.service.GiftCertificateService;
-import com.epam.esm.service.GiftCertificateToTagService;
-import com.epam.esm.service.TagService;
+import com.epam.esm.certificate_service.entities.GiftCertificate;
+import com.epam.esm.certificate_service.entities.GiftCertificateToTag;
+import com.epam.esm.certificate_service.entities.Tag;
+import com.epam.esm.certificate_service.service.GiftCertificateService;
+import com.epam.esm.certificate_service.service.GiftCertificateToTagService;
+import com.epam.esm.certificate_service.service.TagService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
