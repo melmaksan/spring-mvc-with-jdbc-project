@@ -47,7 +47,9 @@ public class TagServiceImpl implements TagService {
         if (tag.getName() == null) {
             throw new EmptyRequestBodyException("Field name is required, please try again!", CODE);
         }
-        return tagDao.insert(tag);
+        int id = tagDao.insert(tag);
+        System.out.println("tag id = " + id);
+        return id;
     }
 
     @Transactional

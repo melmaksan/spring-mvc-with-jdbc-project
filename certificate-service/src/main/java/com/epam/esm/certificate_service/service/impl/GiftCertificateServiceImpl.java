@@ -78,6 +78,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         if (id > 0 && giftCertificate.getTags() != null) {
             tagsUpdate(giftCertificate, id);
         }
+        System.out.println("certificate id = " + id);
         return id;
     }
 
